@@ -1,8 +1,5 @@
 <?php
 
-require "./functions.php";
-//require "./router.php";
-
 class Database {
     public $connection;
 
@@ -15,11 +12,6 @@ class Database {
         $statement = $this->connection->prepare($query);
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }
-
-$db = new Database();
-$posts = $db->query("select * from posts");
-
-dd($posts);
