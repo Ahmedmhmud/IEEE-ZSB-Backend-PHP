@@ -14,6 +14,6 @@ class Database {
         $statement = $this->connection->prepare($query);
         $statement->execute($params);
 
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement;
     }
 }
