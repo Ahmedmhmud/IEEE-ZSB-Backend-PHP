@@ -13,8 +13,19 @@
                                 <div>
                                     <label for="body" class="block text-sm font-medium text-gray-700">Body</label>
                                     <div class="mt-1">
-                                        <textarea name="body" id="body" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
+                                        <textarea 
+                                            name="body" 
+                                            id="body" 
+                                            rows="3" 
+                                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                                            required
+                                            placeholder="Write your note here..."
+                                        ><?= $_POST['body'] ?? '' ?></textarea>
                                     </div>
+
+                                    <?php if(isset($errors['body'])) : ?>
+                                        <p class="text-red-500 text-xs mt-1"><?= $errors['body'] ?></p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
