@@ -3,15 +3,17 @@
 class Database {
     public $connection;
 
-    public function __construct(){
-        $dsn = "mysql:host=127.0.0.1;port=3306;dbname=myapp;user=tableuser;password=StrongPassword123!;charset=utf8mb4";
-        $this->connection = new PDO($dsn);
+    public function __construct($config, $username = 'tableuser', $password = 'StrongPassword123!') {
+        $dsn = "mysql:" . http_build_query($config, '', ';');
+        $this->connection = new PDO($dsn, $username, $password, [
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]);
     }
 
-    public function query($query){
+    public function query($query, $params = []) {
         $statement = $this->connection->prepare($query);
-        $statement->execute();
+        $statement->execute($params);
 
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }

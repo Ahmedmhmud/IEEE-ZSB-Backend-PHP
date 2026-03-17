@@ -2,24 +2,13 @@
 
 require "./functions.php";
 //require "./router.php";
+require "./Database.php";
 
-class Database {
-    public $connection;
+$config = require "./config.php";
 
-    public function __construct(){
-        $dsn = "mysql:host=127.0.0.1;port=3306;dbname=myapp;user=tableuser;password=StrongPassword123!;charset=utf8mb4";
-        $this->connection = new PDO($dsn);
-    }
-
-    public function query($query){
-        $statement = $this->connection->prepare($query);
-        $statement->execute();
-
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
-}
-
-$db = new Database();
-$posts = $db->query("select * from posts");
+$db = new Database($config['database']);
+$id = $_GET['id'];
+$query = "select * from posts where id = ?";
+$posts = $db->query("select * from posts where id = ?", [$id]);
 
 dd($posts);
