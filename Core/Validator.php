@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Validator{
     public static function string($value, $min = 0, $max = INF){
         $value = trim($value);
