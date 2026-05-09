@@ -7,7 +7,9 @@
         <div>
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="mt-5 md:col-span-2 md:mt-0">
-                    <form method="POST" action="/notes">
+                    <form method="POST" action="/note">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <input type="hidden" name="id" value="<?= $note['id'] ?>">
                         <div class="shadow sm:overflow-hidden sm:rounded-md">
                             <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
                                 <div>
@@ -20,7 +22,7 @@
                                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
                                             required
                                             placeholder="Write your note here..."
-                                        ><?= $_POST['body'] ?? '' ?></textarea>
+                                        ><?= $note['body'] ?? '' ?></textarea>
                                     </div>
 
                                     <?php if(isset($errors['body'])) : ?>
@@ -29,8 +31,9 @@
                                 </div>
                             </div>
 
-                            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Create Note</button>
+                            <div class="bg-gray-50 px-4 py-3 text-right sm:px-6 flex gap-x-4 justify-end">
+                                <a href='/notes' class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Cancel</a>
+                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Apply</button>
                             </div>
                         </div>
                     </form>
